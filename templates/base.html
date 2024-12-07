@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tweeter_V2{% endblock %}</title>
+
+    <!-- Bootstrap CSS (Default + Dark Mode Support) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.3/dist/css/bootstrap-dark.min.css" rel="stylesheet" media="(prefers-color-scheme: dark)">
+    
+    <!-- Custom CSS -->
+    {% comment %} <link href="{% static 'css/custom.css' %}" rel="stylesheet"> {% endcomment %}
+
+    <!-- Additional dark mode button styling -->
+    <style>
+        @media (prefers-color-scheme: dark) {
+            /* Override for better visibility in dark mode */
+            .btn-success {
+                background-color: #28a745 !important; /* Brighter green */
+                border-color: #28a745 !important;
+                color: white !important;
+            }
+            .btn-danger {
+                background-color: #dc3545 !important; /* Brighter red */
+                border-color: #dc3545 !important;
+                color: white !important;
+            }
+            .btn-primary {
+                background-color: #007bff !important; /* Brighter blue */
+                border-color: #007bff !important;
+                color: white !important;
+            }
+        }
+    </style>
+
+    {% block extra_css %}
+    <!-- Additional CSS can be added by child templates -->
+    {% endblock %}
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Tweeter_V2</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'tweet_list' %}"> <input type="button" value="Home" class="btn btn-outline-link"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"> <input type="submit" value="About" class="btn btn-outline-link"></a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "user_logout" %}"> <input type="submit" value="Logout" class="btn btn-danger"></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "user_login" %}"><input type="submit" value="Login" class="btn btn-primary"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "user_register" %}"> <input type="submit" value="Register" class="btn btn-success"></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        {% block content %}
+        <!-- Child page content goes here -->
+        {% endblock %}
+    </div>
+<br><br>
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-light text-lg-start mt-auto">
+        <div class="container p-4">
+            <p>&copy; 2024 Tweeter_V2. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (and Popper.js for Bootstrap components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% block extra_js %}
+    <!-- Additional JavaScript can be added by child templates -->
+    {% endblock %}
+
+</body>
+</html>

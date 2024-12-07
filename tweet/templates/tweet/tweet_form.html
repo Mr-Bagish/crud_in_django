@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+{% if form.instance.id %}
+<h1>Edit Tweet</h1>
+{% else %}
+<h1>Create Tweet</h1>
+{% endif %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}<br>
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+{% endblock content %}

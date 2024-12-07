@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Are you sure want to delete ? </h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Yes" class="btn btn-danger">
+    <a href="{% url 'tweet_list' %}"><input type="button" value="No" class="btn btn-primary"></a>
+</form>
+{% endblock content %}
